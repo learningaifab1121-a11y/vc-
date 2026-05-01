@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "user": {
+      "title": "User Profile",
+      "description": "Public profile information for a member",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["member", "admin"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["displayName", "photoURL", "role", "updatedAt"]
+    },
+    "review": {
+      "title": "Member Review",
+      "description": "A review or comment left by a member",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userAvatar": { "type": "string" },
+        "text": { "type": "string" },
+        "rating": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "userName", "userAvatar", "text", "rating", "createdAt"]
+    },
+    "photo": {
+      "title": "Member Photo",
+      "description": "A car photo uploaded by a member",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "caption": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "imageUrl", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Main user collection for public profiles"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "review",
+      "description": "Collection of community reviews"
+    },
+    "/photos/{photoId}": {
+      "schema": "photo",
+      "description": "Collection of gallery photos"
+    }
+  }
+}
